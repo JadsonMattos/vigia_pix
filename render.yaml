@@ -3,7 +3,7 @@ services:
   - type: web
     name: vigiapix-backend
     env: python
-    region: sao
+    region: oregon
     plan: free
     rootDir: backend
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
@@ -31,7 +31,7 @@ services:
   - type: redis
     name: vigiapix-redis
     plan: free
-    region: sao
+    region: oregon
     maxmemoryPolicy: allkeys-lru
     ipAllowList:
       - source: 0.0.0.0/0
@@ -40,7 +40,7 @@ databases:
   # PostgreSQL Database
   - name: vigiapix-db
     plan: free
-    region: sao
+    region: oregon
     databaseName: vigiapix
     user: vigiapix
 
