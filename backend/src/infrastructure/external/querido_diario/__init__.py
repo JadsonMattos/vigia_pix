@@ -1,0 +1,4 @@
+"""Querido Diário API integration"""
+
+
+
