@@ -28,7 +28,7 @@ services:
         sync: false
 
   # PostgreSQL Database
-  - type: pspg
+  - type: pg
     name: vigiapix-db
     plan: free
     region: sao

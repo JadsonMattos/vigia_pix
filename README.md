@@ -69,7 +69,7 @@ O sistema integra dados financeiros, políticos e físicos de múltiplas fontes 
 ```bash
 # Clone o repositório
 git clone <repo-url>
-cd dev_impacto
+cd vigia_pix
 
 # Inicie os serviços
 docker-compose up -d
