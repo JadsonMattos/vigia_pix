@@ -27,18 +27,18 @@ services:
       - key: OPENAI_API_KEY
         sync: false
 
-  # PostgreSQL Database
-  - type: pg
-    name: vigiapix-db
-    plan: free
-    region: sao
-    databaseName: vigiapix
-    user: vigiapix
-
   # Redis Cache
   - type: redis
     name: vigiapix-redis
     plan: free
     region: sao
     maxmemoryPolicy: allkeys-lru
+
+databases:
+  # PostgreSQL Database
+  - name: vigiapix-db
+    plan: free
+    region: sao
+    databaseName: vigiapix
+    user: vigiapix
 
