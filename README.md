@@ -1,8 +1,8 @@
-# 🔗 EloGov - Transparência Radical
+# 🔗 VigiaPix - Transparência Radical
 
 > O Portal da Transparência diz o valor. Nós mostramos a obra.
 
-EloGov é uma plataforma inovadora que integra dados financeiros, políticos e físicos em um único "Trust Score" auditado por Inteligência Artificial, permitindo que cidadãos verifiquem se os recursos públicos das emendas parlamentares foram aplicados corretamente.
+VigiaPix é uma plataforma inovadora que integra dados financeiros, políticos e físicos em um único "Trust Score" auditado por Inteligência Artificial, permitindo que cidadãos verifiquem se os recursos públicos das emendas parlamentares foram aplicados corretamente.
 
 ## 📋 Índice
 
@@ -18,7 +18,7 @@ EloGov é uma plataforma inovadora que integra dados financeiros, políticos e f
 
 ## 🎯 Sobre o Projeto
 
-EloGov foi desenvolvido durante o **Hackathon Devs de Impacto 2025** com o objetivo de aumentar a transparência na aplicação de recursos públicos. O sistema integra três fontes de dados:
+VigiaPix foi desenvolvido durante o **Hackathon Devs de Impacto 2025** com o objetivo de aumentar a transparência na aplicação de recursos públicos. O sistema integra três fontes de dados:
 
 1. **Portal da Transparência** (Fonte Financeira) - Dados automáticos do SIAFI
 2. **Gabinete Parlamentar** (Fonte Política) - Justificativas e objetos detalhados
@@ -36,7 +36,7 @@ O sistema atual de transparência pública apresenta três grandes lacunas:
 
 ## ✅ Solução: Triangulação
 
-EloGov não substitui o Portal da Transparência. Ele o enriquece conectando duas novas pontas:
+VigiaPix não substitui o Portal da Transparência. Ele o enriquece conectando duas novas pontas:
 
 ### Fonte 1: Portal (Financeiro)
 - Valor empenhado
@@ -67,7 +67,7 @@ O sistema utiliza **OpenAI GPT** para cruzar os três dados e gerar uma pontuaç
 
 ## 👥 Equipe
 
-Este projeto foi desenvolvido pela equipe **EloGov** durante o Hackathon Devs de Impacto 2025:
+Este projeto foi desenvolvido pela equipe **VigiaPix** durante o Hackathon Devs de Impacto 2025:
 
 - **Tech Lead / Backend Core**: Desenvolvimento da arquitetura e integrações
 - **IA/ML Engineer**: Implementação de análise com IA e NLP
@@ -86,8 +86,8 @@ Este projeto foi desenvolvido pela equipe **EloGov** durante o Hackathon Devs de
 
 1. **Clone o repositório**:
 ```bash
-git clone https://github.com/seu-usuario/elogov.git
-cd elogov
+git clone https://github.com/seu-usuario/vigiapix.git
+cd vigiapix
 ```
 
 2. **Abra o projeto**:
@@ -139,7 +139,7 @@ http://localhost:8000
 ## 📁 Estrutura do Projeto
 
 ```
-elogov/
+vigiapix/
 ├── index.html          # Landing page
 ├── app.html            # Aplicação principal
 ├── style.css           # Estilos globais
@@ -193,5 +193,5 @@ Para dúvidas ou sugestões sobre o projeto, entre em contato através do assist
 
 ---
 
-**Desenvolvido com ❤️ pela equipe EloGov - Hackathon Devs de Impacto 2025**
+**Desenvolvido com ❤️ pela equipe VigiaPix - Hackathon Devs de Impacto 2025**
 

@@ -7,7 +7,7 @@ window.realData = [
         funcao: "Saúde", 
         status_gov: "Empenhado", 
         
-        // Campos EloGov (Começam nulos)
+        // Campos VigiaPix (Começam nulos)
         aiScore: null, 
         aiReason: null,
         executorData: null, 
