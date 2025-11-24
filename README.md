@@ -1,343 +1,197 @@
-# 🚀 VigiaPix
+# 🔗 EloGov - Transparência Radical
 
-> **Fiscalização Inteligente de Emendas Pix com Inteligência Artificial**
+> O Portal da Transparência diz o valor. Nós mostramos a obra.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-14+-black.svg)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+EloGov é uma plataforma inovadora que integra dados financeiros, políticos e físicos em um único "Trust Score" auditado por Inteligência Artificial, permitindo que cidadãos verifiquem se os recursos públicos das emendas parlamentares foram aplicados corretamente.
 
-## 📖 Descrição
+## 📋 Índice
 
-**VigiaPix** é um sistema especializado em rastreamento e transparência de Emendas Pix, utilizando Inteligência Artificial para transformar cada cidadão em um fiscal inteligente dos recursos públicos.
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Problema](#problema)
+- [Solução](#solução)
+- [Tecnologias](#tecnologias)
+- [Equipe](#equipe)
+- [Instalação](#instalação)
+- [Uso](#uso)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Licença](#licença)
 
-O sistema integra dados financeiros, políticos e físicos de múltiplas fontes (Portal da Transparência, Transferegov.br, CEIS) em um único "Trust Score" auditado por Inteligência Artificial, promovendo transparência radical e controle social sobre a execução de emendas parlamentares.
+## 🎯 Sobre o Projeto
 
-### 🎯 Principais Funcionalidades
+EloGov foi desenvolvido durante o **Hackathon Devs de Impacto 2025** com o objetivo de aumentar a transparência na aplicação de recursos públicos. O sistema integra três fontes de dados:
 
-- **🔍 Rastreamento Completo**: Acompanhamento de execução em tempo real com valores, metas, progresso e riscos
-- **🤖 IA Proativa**: Análise automática com OpenAI, detecção de riscos e alertas inteligentes
-- **📊 Transparência Total**: Mostra valores, metas, progresso e riscos de forma clara e acessível
-- **🔗 Triangulação de Dados**: Integra Portal (financeiro), Gabinete (político) e Executor (físico)
-- **🏆 Placar de Transparência**: Ranking e métricas por município e parlamentar
-- **📜 Legislações Simplificadas**: Simplificação de textos legislativos com IA
-- **💬 Bot WhatsApp**: Interação via WhatsApp para consulta de legislações
-- **🗺️ Mapa Interativo**: Visualização geográfica das emendas com geocodificação
+1. **Portal da Transparência** (Fonte Financeira) - Dados automáticos do SIAFI
+2. **Gabinete Parlamentar** (Fonte Política) - Justificativas e objetos detalhados
+3. **Executor** (Fonte Física) - Fotos, relatórios e progresso das obras
 
-## 👥 Membros da Equipe
+Através de Inteligência Artificial (OpenAI GPT), o sistema gera um **Trust Score** que avalia a integridade de cada emenda parlamentar.
 
-**Devs de Impacto - Hackathon 2025**
+## ❌ Problema
 
-- **Tech Lead / Backend Core**: Desenvolvimento da arquitetura backend e integrações
-- **IA/ML Engineer**: Implementação de análise com IA e NLP
-- **Frontend Lead**: Desenvolvimento da interface Next.js e componentes React
-- **Full Stack / DevOps**: Configuração de infraestrutura e CI/CD
-- **Backend / Data Engineer**: Integração de dados e APIs externas
+O sistema atual de transparência pública apresenta três grandes lacunas:
+
+1. **Dados Isolados**: O Portal da Transparência mostra o PIX saindo, mas não conecta com a Nota Fiscal do município
+2. **Objetos Genéricos**: "Custeio de Saúde" pode ser qualquer coisa. Sem detalhamento, não há fiscalização real
+3. **Volume Impossível**: Humanos não conseguem auditar milhares de notas fiscais manualmente
+
+## ✅ Solução: Triangulação
+
+EloGov não substitui o Portal da Transparência. Ele o enriquece conectando duas novas pontas:
+
+### Fonte 1: Portal (Financeiro)
+- Valor empenhado
+- Data de pagamento
+- Deputado responsável
+- Status no SIAFI
+
+### Fonte 2: Gabinete (Político)
+- Objeto detalhado da emenda
+- Justificativa de impacto social
+- Público-alvo beneficiado
+
+### Fonte 3: Executor (Físico)
+- Fotos georreferenciadas da obra
+- Progresso físico (%)
+- Relatórios de execução
+- Notas fiscais
+
+### Trust Score (IA)
+O sistema utiliza **OpenAI GPT** para cruzar os três dados e gerar uma pontuação de 0 a 100, indicando o nível de confiança na aplicação correta dos recursos.
 
 ## 🛠️ Tecnologias
 
-### Backend
-- **Python 3.11+** com FastAPI
-- **PostgreSQL** (banco de dados)
-- **Redis** (cache)
-- **OpenAI API** (análise e classificação com IA)
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **IA**: OpenAI GPT (simulado para demo)
+- **Design**: Font Awesome Icons, Google Fonts (Inter)
+- **Arquitetura**: Aplicação web estática (sem backend necessário para demo)
 
-### Frontend
-- **Next.js 14+** (App Router) com TypeScript
-- **Tailwind CSS** (estilização)
-- **React Query** (data fetching)
-- **PWA** (Progressive Web App)
+## 👥 Equipe
 
-### Integrações
-- Portal da Transparência
-- Transferegov.br
-- OpenStreetMap (geocodificação)
-- OpenAI (análise de dados)
+Este projeto foi desenvolvido pela equipe **EloGov** durante o Hackathon Devs de Impacto 2025:
 
-## 📋 Pré-requisitos
+- **Tech Lead / Backend Core**: Desenvolvimento da arquitetura e integrações
+- **IA/ML Engineer**: Implementação de análise com IA e NLP
+- **Frontend Lead**: Desenvolvimento da interface e componentes
+- **Full Stack / DevOps**: Configuração de infraestrutura
+- **Backend / Data Engineer**: Integração de dados e APIs externas
 
-- Python 3.11+
-- Node.js 18+
-- Docker e Docker Compose (opcional)
-- PostgreSQL 14+ (se não usar Docker)
-- Redis (se não usar Docker)
+## 🚀 Instalação
 
-## 🚀 Instalação e Configuração
+### Pré-requisitos
 
-### Opção 1: Docker (Recomendado)
+- Navegador web moderno (Chrome, Firefox, Safari, Edge)
+- Servidor web local (opcional, para desenvolvimento)
 
+### Instalação Local
+
+1. **Clone o repositório**:
 ```bash
-# Clone o repositório
-git clone <repo-url>
-cd vigia_pix
-
-# Inicie os serviços
-docker compose up -d
-
-# Aguarde alguns segundos para os serviços iniciarem
-# As tabelas do banco são criadas automaticamente na primeira inicialização
-
-# O backend estará disponível em http://localhost:8000
-# O frontend estará disponível em http://localhost:3000
-# API Docs: http://localhost:8000/docs
+git clone https://github.com/seu-usuario/elogov.git
+cd elogov
 ```
 
-**✅ Tudo funciona automaticamente:**
-- ✅ Banco de dados PostgreSQL criado e configurado
-- ✅ Redis criado e configurado
-- ✅ Tabelas do banco criadas automaticamente (não precisa rodar migrações)
-- ✅ Backend e Frontend prontos para uso
+2. **Abra o projeto**:
 
-**📝 Opcional - Popular com dados de demonstração:**
+**Opção A - Servidor Local (Recomendado)**:
 ```bash
-# Se quiser popular o banco com dados de exemplo
-docker compose exec backend python scripts/seed_emenda_pix_data.py
+# Python 3
+python -m http.server 8000
+
+# Node.js
+npx http-server
+
+# PHP
+php -S localhost:8000
 ```
 
-**🔍 O que acontece automaticamente:**
-- ✅ **Criação de tabelas**: As tabelas do banco são criadas automaticamente quando o backend inicia pela primeira vez (via `init_db()` no `main.py`)
-- ✅ **Configuração de serviços**: PostgreSQL, Redis, Backend e Frontend são configurados automaticamente
-- ✅ **Health checks**: Os serviços aguardam uns aos outros estarem prontos antes de iniciar
+**Opção B - Abrir Diretamente**:
+- Abra `index.html` no navegador (algumas funcionalidades podem não funcionar devido a políticas CORS)
 
-**⚠️ Nota sobre migrações:**
-- O projeto usa `Base.metadata.create_all()` para criar tabelas automaticamente
-- Migrações do Alembic existem no projeto, mas não são necessárias para funcionar
-- Se preferir usar migrações: `docker-compose exec backend alembic upgrade head`
-
-### Opção 2: Instalação Local
-
-#### Backend
-
-```bash
-cd backend
-
-# Crie um ambiente virtual
-python -m venv venv
-
-# Ative o ambiente virtual
-# Linux/Mac:
-source venv/bin/activate
-# Windows:
-venv\Scripts\activate
-
-# Instale as dependências
-pip install -r requirements.txt
-
-# Configure as variáveis de ambiente
-cp .env.example .env
-# Edite .env com suas configurações:
-# - DATABASE_URL (padrão: postgresql+asyncpg://postgres:postgres@localhost:5432/vigiapix)
-# - REDIS_URL (padrão: redis://localhost:6379)
-# - OPENAI_API_KEY (obrigatório para funcionalidades de IA)
-
-# As tabelas são criadas automaticamente na primeira inicialização
-# Não é necessário rodar migrações manualmente
-
-# Inicie o servidor
-uvicorn src.main:app --reload
-
-# Opcional: Popular com dados de demonstração
-# python scripts/seed_emenda_pix_data.py
+3. **Acesse no navegador**:
+```
+http://localhost:8000
 ```
 
-#### Frontend
+## 📖 Uso
 
-```bash
-cd frontend
+### Para Cidadãos
 
-# Instale as dependências
-npm install
+1. Acesse a página inicial (`index.html`)
+2. Clique em **"Transparência Pública"** para conversar com o assistente IA
+3. Clique em **"Acessar Sistema"** para ver o painel de monitoramento
+4. Visualize as emendas parlamentares e seus Trust Scores
+5. Clique em qualquer emenda para ver o dossiê completo
 
-# Configure as variáveis de ambiente
-cp .env.example .env.local
-# Edite .env.local:
-# NEXT_PUBLIC_API_URL=http://localhost:8000
+### Para Parlamentares
 
-# Inicie o servidor de desenvolvimento
-npm run dev
-```
+1. Acesse **"Área Gabinete"** no menu lateral
+2. Selecione uma emenda do Portal da Transparência
+3. Preencha o objeto detalhado e justificativa
+4. O sistema calculará automaticamente o Trust Score
 
-### Variáveis de Ambiente
+### Para Executores (Municípios)
 
-#### Backend (.env)
-```env
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/vigiapix
-REDIS_URL=redis://localhost:6379
-OPENAI_API_KEY=sk-...
-ENVIRONMENT=development
-DEBUG=true
-```
-
-#### Frontend (.env.local)
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_ENVIRONMENT=development
-```
-
-## 🚀 Deploy
-
-Para fazer deploy gratuito do projeto, consulte o guia completo em [DEPLOY.md](./DEPLOY.md).
-
-**Resumo rápido:**
-- **Frontend**: Deploy no [Vercel](https://vercel.com) (gratuito)
-- **Backend**: Deploy no [Render.com](https://render.com) (gratuito)
-- PostgreSQL e Redis incluídos no free tier do Render
-
-## 💻 Uso
-
-### Acessando a Aplicação
-
-1. **Landing Page**: http://localhost:3000
-   - Apresentação do projeto
-   - Cards de funcionalidades
-   - Links para todas as páginas
-
-2. **Dashboard**: http://localhost:3000/dashboard
-   - Visualização de legislações
-   - Filtros e busca
-   - Estatísticas agregadas
-
-3. **Emenda Pix**: http://localhost:3000/emenda-pix
-   - Lista de emendas
-   - Filtros por status, área, UF
-   - Detalhes de cada emenda
-
-4. **Placar de Transparência**: http://localhost:3000/placar-transparencia
-   - Busca por município ou parlamentar
-   - Estatísticas agregadas
-   - Visualização de alertas
-
-5. **Triangulação**: http://localhost:3000/triangulacao
-   - Painel Integrado (cidadão)
-   - Área Gabinete (parlamentar)
-   - Área Executor (município)
-
-6. **WhatsApp Simulator**: http://localhost:3000/whatsapp-simulator
-   - Teste do bot WhatsApp
-   - Consulta de legislações
-
-### Funcionalidades Principais
-
-#### Rastreamento de Emendas
-- Visualize todas as emendas com filtros avançados
-- Acompanhe valores (aprovado, empenhado, liquidado, pago)
-- Veja progresso de execução em tempo real
-- Receba alertas de anomalias detectadas pela IA
-
-#### Triangulação de Dados
-- **Fonte Portal**: Dados financeiros automáticos
-- **Fonte Gabinete**: Input do parlamentar (objeto, justificativa)
-- **Fonte Executor**: Prestação de contas física (fotos, relatório)
-- **Trust Score**: Cálculo automático baseado nas 3 fontes
-
-#### Análise com IA
-- Categorização automática de gastos
-- Extração de objeto principal e localização
-- Detecção de anomalias cruzadas
-- Geração de pareceres explicáveis
-
-## 🧪 Testes
-
-### Backend
-```bash
-cd backend
-pytest
-pytest --cov=src --cov-report=html
-```
-
-### Frontend
-```bash
-cd frontend
-npm test
-npm run test:coverage
-npm run test:e2e
-```
+1. Acesse **"Área Executor"** no menu lateral
+2. Selecione uma emenda empenhada
+3. Informe o progresso físico, fotos e relatório
+4. O sistema atualizará o Trust Score com as evidências físicas
 
 ## 📁 Estrutura do Projeto
 
 ```
-dev_impacto/
-├── backend/                 # Backend Python/FastAPI
-│   ├── src/
-│   │   ├── domain/         # Domain Layer (DDD)
-│   │   ├── application/    # Application Layer
-│   │   ├── infrastructure/ # Infrastructure Layer
-│   │   └── presentation/   # Presentation Layer
-│   ├── tests/
-│   └── requirements.txt
-│
-├── frontend/                # Frontend Next.js
-│   ├── src/
-│   │   ├── app/           # Next.js App Router
-│   │   ├── features/      # Feature-based organization
-│   │   ├── shared/        # Código compartilhado
-│   │   └── core/          # Core functionality
-│   ├── public/
-│   └── package.json
-│
-├── docker-compose.yml      # Configuração Docker
-└── README.md              # Este arquivo
+elogov/
+├── index.html          # Landing page
+├── app.html            # Aplicação principal
+├── style.css           # Estilos globais
+├── app.js              # Lógica da aplicação
+├── openai.js           # Simulação de IA (OpenAI)
+├── data.js             # Dados de exemplo
+├── logo.jpeg           # Logo do projeto
+└── README.md           # Este arquivo
 ```
+
+## 🔧 Configuração
+
+### Variáveis de Ambiente
+
+Para produção, você precisará configurar:
+
+- `OPENAI_API_KEY`: Chave da API OpenAI (para integração real)
+- `DATABASE_URL`: URL do banco de dados (se houver backend)
+
+**Nota**: A versão atual é uma demo com simulação de IA. Para integração real com OpenAI, é necessário implementar um backend.
+
+## 🎨 Funcionalidades
+
+- ✅ Painel de monitoramento unificado
+- ✅ Trust Score calculado por IA
+- ✅ Interface para parlamentares adicionarem justificativas
+- ✅ Interface para executores enviarem evidências físicas
+- ✅ Assistente de transparência pública (chat simulado)
+- ✅ Visualização de dossiê completo por emenda
+- ✅ Design responsivo e moderno
+
+## 📝 Licença
+
+Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+### Código Aberto
+
+Este é um projeto de código aberto desenvolvido para o Hackathon Devs de Impacto 2025. Contribuições são bem-vindas!
 
 ## 🤝 Contribuindo
 
-1. Faça um fork do projeto
+1. Faça um Fork do projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-### Padrões de Código
+## 📞 Contato
 
-- Siga os princípios SOLID
-- Escreva testes para novas features
-- Mantenha cobertura de testes > 70%
-- Use TypeScript strict mode
-- Siga as convenções de nomenclatura do projeto
-
-## 📝 Licença
-
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-### Licença MIT
-
-```
-MIT License
-
-Copyright (c) 2025 Devs de Impacto
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-## 🙏 Agradecimentos
-
-- Dados Abertos da Câmara dos Deputados
-- Dados Abertos do Senado Federal
-- Transferegov.br
-- OpenStreetMap
-- OpenAI
-- Comunidade open source
-
-## 📧 Contato
-
-Para dúvidas ou sugestões, abra uma issue no repositório.
+Para dúvidas ou sugestões sobre o projeto, entre em contato através do assistente de transparência pública na página inicial.
 
 ---
 
-**Desenvolvido com ❤️ pela equipe Devs de Impacto - Hackathon 2025**
+**Desenvolvido com ❤️ pela equipe EloGov - Hackathon Devs de Impacto 2025**
+

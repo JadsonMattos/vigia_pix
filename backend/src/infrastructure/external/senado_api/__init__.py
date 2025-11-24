@@ -1,4 +1,0 @@
-"""Senado Federal API integration"""
-
-
-

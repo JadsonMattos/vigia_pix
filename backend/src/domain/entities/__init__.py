@@ -1,5 +1,0 @@
-"""Domain entities"""
-
-
-
-
