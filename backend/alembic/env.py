@@ -22,7 +22,7 @@ if config.config_file_name is not None:
 # Get database URL from environment and convert async to sync
 database_url = os.getenv(
     "DATABASE_URL",
-    "postgresql+asyncpg://postgres:postgres@localhost:5432/voz_cidada"
+    "postgresql+asyncpg://postgres:postgres@localhost:5432/vigiapix"
 )
 # Convert asyncpg to psycopg2 for Alembic (sync)
 sync_url = database_url.replace("postgresql+asyncpg://", "postgresql://")

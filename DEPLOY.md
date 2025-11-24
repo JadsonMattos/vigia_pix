@@ -61,33 +61,109 @@ NEXT_PUBLIC_ENVIRONMENT=production
 
 ## 🔧 Deploy do Backend (Render.com)
 
-### Passo 1: Preparar o Repositório
+### 📊 Diferença: Docker Local vs Render
 
-1. Certifique-se de que o arquivo `render.yaml` está na raiz do projeto (mesmo que seja um monorepo)
-2. O arquivo já está configurado para PostgreSQL e Redis gratuitos
-3. **Importante**: O `render.yaml` tem `rootDir: backend`, então o Render vai usar apenas a pasta `backend/` do repositório
+| Aspecto | Docker Local | Render (Produção) |
+|---------|--------------|-------------------|
+| **PostgreSQL** | Container Docker (`postgres:14-alpine`) | Serviço gerenciado (criar manualmente) |
+| **Redis** | Container Docker (`redis:7-alpine`) | Serviço gerenciado (criado pelo `render.yaml`) |
+| **Connection String** | `postgresql+asyncpg://postgres:postgres@postgres:5432/vigiapix` | Fornecida pelo Render (formato diferente) |
+| **Configuração** | Automática via `docker-compose.yml` | Manual no Render Dashboard |
+| **Banco de Dados** | Criado automaticamente | **Você precisa criar manualmente** (free tier = 1 banco) |
 
-### Passo 2: Deploy no Render
+### 📊 Diferença: Docker Local vs Render
+
+**Localmente (Docker Compose):**
+- PostgreSQL e Redis rodam em containers Docker
+- Connection string: `postgresql+asyncpg://postgres:postgres@postgres:5432/vigiapix`
+- Tudo configurado automaticamente no `docker-compose.yml`
+
+**No Render (Produção):**
+- PostgreSQL e Redis são serviços gerenciados pelo Render
+- Você precisa criar o banco manualmente (free tier permite apenas 1)
+- Connection string vem do Render (formato diferente)
+- Redis é criado automaticamente pelo `render.yaml`
+
+### Passo 1: Configurar Banco de Dados PostgreSQL no Render
+
+**⚠️ IMPORTANTE**: O Render free tier permite apenas **1 banco PostgreSQL ativo**. 
+
+#### Opção A: Você JÁ TEM um banco PostgreSQL no Render (Recomendado)
+
+1. Acesse [render.com](https://render.com) e faça login
+2. No Dashboard, procure por **"PostgreSQL"** na lista de serviços
+3. Clique no banco de dados existente
+4. Vá na aba **"Connections"** ou **"Info"**
+5. **Copie a Connection String** (Internal Database URL ou Connection String)
+   - Você verá algo como: `postgres://usuario:senha@host:5432/database`
+   - **IMPORTANTE**: Adicione `+asyncpg` após `postgresql`:
+     - De: `postgres://...`
+     - Para: `postgresql+asyncpg://...`
+   - Exemplo completo: `postgresql+asyncpg://usuario:senha@dpg-xxxxx-a.oregon-postgres.render.com:5432/database`
+6. **Pule para o Passo 2** (não precisa criar novo banco)
+
+#### Opção B: Você NÃO TEM banco ou quer criar um novo
+
+**⚠️ ATENÇÃO**: Se você já tem um banco, você precisa:
+- **Deletar o banco antigo primeiro** (você perderá todos os dados!)
+- Ou usar o banco existente (Opção A acima)
+
+**Se decidir criar um novo:**
+
+1. Acesse [render.com](https://render.com) e faça login
+2. Se você já tem um banco:
+   - Vá no banco existente → **"Settings"** → **"Delete"**
+   - ⚠️ **CUIDADO**: Isso apagará todos os dados permanentemente!
+3. Clique em **"New +"** → **"PostgreSQL"**
+4. Configure:
+   - **Name**: `vigiapix-db` (ou qualquer nome)
+   - **Database**: `vigiapix`
+   - **User**: Deixe o padrão ou escolha um nome
+   - **Region**: `Oregon` (ou a região que você escolher)
+   - **Plan**: `Free`
+5. Clique em **"Create Database"**
+6. Aguarde alguns minutos até o banco estar pronto
+7. **Copie a Connection String**:
+   - No dashboard do banco, vá em **"Connections"**
+   - Você verá algo como: `postgres://usuario:senha@host:5432/database`
+   - **IMPORTANTE**: Adicione `+asyncpg` após `postgresql`:
+     - De: `postgres://...`
+     - Para: `postgresql+asyncpg://...`
+   - Exemplo completo: `postgresql+asyncpg://usuario:senha@dpg-xxxxx-a.oregon-postgres.render.com:5432/vigiapix`
+
+### Passo 2: Preparar o Repositório
+
+1. Certifique-se de que o arquivo `render.yaml` está na raiz do projeto
+2. O arquivo já está configurado para Redis (criado automaticamente)
+3. **Importante**: O `render.yaml` tem `rootDir: backend`, então o Render vai usar apenas a pasta `backend/`
+
+### Passo 3: Deploy no Render
 
 1. Acesse [render.com](https://render.com)
-2. Faça login com GitHub
-3. Clique em "New +" → "Blueprint"
-4. Conecte seu repositório GitHub
-5. Render detectará automaticamente o `render.yaml` na raiz
-6. Render criará automaticamente:
+2. Clique em **"New +"** → **"Blueprint"**
+3. Conecte seu repositório GitHub
+4. Render detectará automaticamente o `render.yaml` na raiz
+5. Render criará automaticamente:
    - Web Service (backend FastAPI)
-   - PostgreSQL Database
    - Redis Instance
+   - **NÃO criará PostgreSQL** (você já criou manualmente)
 
-### Passo 3: Configurar Variáveis de Ambiente
+### Passo 4: Configurar Variáveis de Ambiente
 
-No Render Dashboard, vá em "Environment" e adicione:
+No Render Dashboard, no serviço `vigiapix-backend`, vá em **"Environment"** e adicione:
 
 ```
 OPENAI_API_KEY=sk-sua-chave-aqui
+DATABASE_URL=postgresql+asyncpg://usuario:senha@host:porta/database
 ```
 
-**Importante**: Você precisa de uma chave da OpenAI. Obtenha em [platform.openai.com](https://platform.openai.com)
+**Onde obter cada valor:**
+- **OPENAI_API_KEY**: Obtenha em [platform.openai.com](https://platform.openai.com)
+- **DATABASE_URL**: Use a connection string que você copiou no Passo 1 (com `+asyncpg`)
+
+**⚠️ Formato da DATABASE_URL:**
+- Deve começar com `postgresql+asyncpg://` (não apenas `postgres://`)
+- Exemplo: `postgresql+asyncpg://vigiapix_user:senha123@dpg-xxxxx-a.oregon-postgres.render.com:5432/vigiapix`
 
 ### Passo 4: Deploy
 
@@ -150,6 +226,7 @@ NEXT_PUBLIC_ENVIRONMENT=production
 ### Render.com (Backend)
 - ✅ 750 horas/mês (suficiente para 24/7)
 - ✅ PostgreSQL e Redis gratuitos
+- ⚠️ **Apenas 1 banco PostgreSQL free tier por conta** (se já tiver um, use o existente)
 - ⚠️ Sleep após 15 minutos de inatividade (pode ser acordado com requisição)
 - ⚠️ Builds podem levar 5-10 minutos
 
@@ -209,6 +286,14 @@ curl https://seu-backend.onrender.com/api/v1/health
 - Confirme que `DATABASE_URL` e `REDIS_URL` estão configurados
 - Verifique se `OPENAI_API_KEY` está definida
 
+### Erro de conexão com banco de dados
+- **Verifique o formato da DATABASE_URL**: Deve começar com `postgresql+asyncpg://` (não `postgres://`)
+- **Exemplo correto**: `postgresql+asyncpg://user:pass@host:5432/dbname`
+- **Exemplo errado**: `postgres://user:pass@host:5432/dbname` ❌
+- Confirme que o banco PostgreSQL está rodando no Render Dashboard
+- Verifique se a connection string foi copiada corretamente (sem espaços extras)
+- Se o banco está em sleep, faça uma requisição ou aguarde alguns segundos
+
 ### Frontend não conecta ao backend
 - Verifique `NEXT_PUBLIC_API_URL` no Vercel
 - Confirme que o backend está rodando (não em sleep)
@@ -218,6 +303,40 @@ curl https://seu-backend.onrender.com/api/v1/health
 - Verifique os logs de build
 - Confirme que todas as dependências estão em `requirements.txt` e `package.json`
 - Verifique se o Python/Node.js está na versão correta
+
+### "Cannot have more than one active free tier database"
+
+**Erro**: `Error: cannot have more than one active free tier database`
+
+**Causa**: Você já tem um banco PostgreSQL ativo no Render. O free tier permite apenas 1 banco.
+
+**Soluções**:
+
+#### ✅ Solução 1: Usar o banco existente (Recomendado)
+
+1. No Render Dashboard, encontre seu banco PostgreSQL existente
+2. Clique nele para abrir os detalhes
+3. Vá em **"Connections"** ou **"Info"**
+4. Copie a **Internal Database URL** ou **Connection String**
+5. Converta para o formato correto:
+   - Se começa com `postgres://`, mude para `postgresql+asyncpg://`
+   - Exemplo: `postgres://user:pass@host:5432/db` → `postgresql+asyncpg://user:pass@host:5432/db`
+6. Use essa connection string no `DATABASE_URL` do seu serviço backend
+
+#### ⚠️ Solução 2: Deletar banco antigo (Cuidado!)
+
+**ATENÇÃO**: Isso apagará todos os dados permanentemente!
+
+1. No Render Dashboard, vá no banco PostgreSQL antigo
+2. Clique em **"Settings"** → Role até o final
+3. Clique em **"Delete Database"**
+4. Confirme a exclusão
+5. Aguarde alguns minutos
+6. Agora você pode criar um novo banco seguindo o Passo 1 (Opção B)
+
+**Quando usar cada solução:**
+- **Use Solução 1** se o banco antigo não tem dados importantes ou você quer reutilizá-lo
+- **Use Solução 2** apenas se você realmente precisa de um banco novo e não se importa em perder os dados do banco antigo
 
 ## 📚 Recursos
 

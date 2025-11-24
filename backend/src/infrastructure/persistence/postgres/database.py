@@ -17,10 +17,10 @@ def get_database_url():
     try:
         socket.gethostbyname('postgres')
         # Inside Docker, use postgres hostname
-        return "postgresql+asyncpg://postgres:postgres@postgres:5432/voz_cidada"
+        return "postgresql+asyncpg://postgres:postgres@postgres:5432/vigiapix"
     except socket.gaierror:
         # Outside Docker, use localhost
-        return "postgresql+asyncpg://postgres:postgres@localhost:5432/voz_cidada"
+        return "postgresql+asyncpg://postgres:postgres@localhost:5432/vigiapix"
 
 DATABASE_URL = get_database_url()
 

@@ -12,7 +12,7 @@ NC='\033[0m'
 
 # Verificar containers
 echo "1. Verificando containers..."
-if docker ps | grep -q "voz_cidada"; then
+if docker ps | grep -q "vigiapix"; then
     echo -e "${GREEN}✅ Containers rodando${NC}"
 else
     echo -e "${RED}❌ Containers não estão rodando${NC}"
@@ -69,7 +69,7 @@ fi
 # Resumo
 echo ""
 echo "📋 Resumo:"
-echo "  - Containers: $(docker ps | grep -c voz_cidada) rodando"
+echo "  - Containers: $(docker ps | grep -c vigiapix) rodando"
 echo "  - Backend: http://localhost:8000/api/docs"
 echo "  - Frontend: http://localhost:3000"
 echo ""

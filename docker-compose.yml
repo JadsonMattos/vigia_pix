@@ -1,9 +1,9 @@
 services:
   postgres:
     image: postgres:14-alpine
-    container_name: voz_cidada_postgres
+    container_name: vigiapix_postgres
     environment:
-      POSTGRES_DB: voz_cidada
+      POSTGRES_DB: vigiapix
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
@@ -18,7 +18,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: voz_cidada_redis
+    container_name: vigiapix_redis
     ports:
       - "6379:6379"
     volumes:
@@ -33,9 +33,9 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: voz_cidada_backend
+    container_name: vigiapix_backend
     environment:
-      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/voz_cidada
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/vigiapix
       REDIS_URL: redis://redis:6379
       ENVIRONMENT: development
       DEBUG: "true"
@@ -55,7 +55,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    container_name: voz_cidada_frontend
+    container_name: vigiapix_frontend
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000
     ports:

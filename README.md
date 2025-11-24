@@ -132,7 +132,7 @@ npm run dev
 
 #### Backend (.env)
 ```env
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/voz_cidada
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/vigiapix
 REDIS_URL=redis://localhost:6379
 OPENAI_API_KEY=sk-...
 ENVIRONMENT=development
