@@ -72,11 +72,37 @@ git clone <repo-url>
 cd vigia_pix
 
 # Inicie os serviços
-docker-compose up -d
+docker compose up -d
+
+# Aguarde alguns segundos para os serviços iniciarem
+# As tabelas do banco são criadas automaticamente na primeira inicialização
 
 # O backend estará disponível em http://localhost:8000
 # O frontend estará disponível em http://localhost:3000
+# API Docs: http://localhost:8000/docs
 ```
+
+**✅ Tudo funciona automaticamente:**
+- ✅ Banco de dados PostgreSQL criado e configurado
+- ✅ Redis criado e configurado
+- ✅ Tabelas do banco criadas automaticamente (não precisa rodar migrações)
+- ✅ Backend e Frontend prontos para uso
+
+**📝 Opcional - Popular com dados de demonstração:**
+```bash
+# Se quiser popular o banco com dados de exemplo
+docker compose exec backend python scripts/seed_emenda_pix_data.py
+```
+
+**🔍 O que acontece automaticamente:**
+- ✅ **Criação de tabelas**: As tabelas do banco são criadas automaticamente quando o backend inicia pela primeira vez (via `init_db()` no `main.py`)
+- ✅ **Configuração de serviços**: PostgreSQL, Redis, Backend e Frontend são configurados automaticamente
+- ✅ **Health checks**: Os serviços aguardam uns aos outros estarem prontos antes de iniciar
+
+**⚠️ Nota sobre migrações:**
+- O projeto usa `Base.metadata.create_all()` para criar tabelas automaticamente
+- Migrações do Alembic existem no projeto, mas não são necessárias para funcionar
+- Se preferir usar migrações: `docker-compose exec backend alembic upgrade head`
 
 ### Opção 2: Instalação Local
 
@@ -100,15 +126,18 @@ pip install -r requirements.txt
 # Configure as variáveis de ambiente
 cp .env.example .env
 # Edite .env com suas configurações:
-# - DATABASE_URL
-# - REDIS_URL
-# - OPENAI_API_KEY
+# - DATABASE_URL (padrão: postgresql+asyncpg://postgres:postgres@localhost:5432/vigiapix)
+# - REDIS_URL (padrão: redis://localhost:6379)
+# - OPENAI_API_KEY (obrigatório para funcionalidades de IA)
 
-# Execute as migrações (se houver)
-# alembic upgrade head
+# As tabelas são criadas automaticamente na primeira inicialização
+# Não é necessário rodar migrações manualmente
 
 # Inicie o servidor
 uvicorn src.main:app --reload
+
+# Opcional: Popular com dados de demonstração
+# python scripts/seed_emenda_pix_data.py
 ```
 
 #### Frontend

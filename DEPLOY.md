@@ -159,7 +159,44 @@ DATABASE_URL=postgresql+asyncpg://usuario:senha@host:porta/database
 
 **Onde obter cada valor:**
 - **OPENAI_API_KEY**: Obtenha em [platform.openai.com](https://platform.openai.com)
-- **DATABASE_URL**: Use a connection string que você copiou no Passo 1 (com `+asyncpg`)
+- **DATABASE_URL**: **IMPORTANTE** - Siga os passos abaixo:
+
+#### Como configurar DATABASE_URL corretamente:
+
+1. **No PostgreSQL do Render**, vá em **"Connections"** ou **"Info"**
+2. **Copie a "Internal Database URL"** ou **"Connection String"**
+   - Ela virá no formato: `postgres://usuario:senha@host:porta/database`
+   - Exemplo: `postgres://vigiapix_user:abc123@dpg-xxxxx-a.oregon-postgres.render.com:5432/vigiapix`
+
+3. **No serviço backend (`vigiapix-backend`)**, vá em **"Environment"** → **"Add Environment Variable"**
+4. **Adicione `DATABASE_URL`** com o valor convertido:
+   - **Substitua `postgres://` por `postgresql+asyncpg://`**
+   - Exemplo convertido: `postgresql+asyncpg://vigiapix_user:abc123@dpg-xxxxx-a.oregon-postgres.render.com:5432/vigiapix`
+
+**⚠️ Por que isso é necessário?**
+- O Render fornece a connection string no formato `postgres://` (padrão PostgreSQL)
+- O código Python usa `asyncpg` que precisa do formato `postgresql+asyncpg://`
+- Você **NÃO pode mudar** nas credenciais do PostgreSQL
+- Você **DEVE converter** na variável de ambiente do backend
+
+**📋 Exemplo Prático:**
+
+**1. Connection String do Render (copie do PostgreSQL):**
+```
+postgres://vigiapix_user:senha123@dpg-xxxxx-a.oregon-postgres.render.com:5432/vigiapix
+```
+
+**2. Converta para usar no backend (adicione `+asyncpg`):**
+```
+postgresql+asyncpg://vigiapix_user:senha123@dpg-xxxxx-a.oregon-postgres.render.com:5432/vigiapix
+```
+
+**3. Cole no campo `DATABASE_URL` do backend no Render Dashboard**
+
+**✅ Resumo:**
+- ❌ **NÃO** altere nas credenciais do PostgreSQL
+- ✅ **SIM**, adicione `+asyncpg` na variável `DATABASE_URL` do backend
+- 🔄 Substitua `postgres://` por `postgresql+asyncpg://`
 
 **⚠️ Formato da DATABASE_URL:**
 - Deve começar com `postgresql+asyncpg://` (não apenas `postgres://`)

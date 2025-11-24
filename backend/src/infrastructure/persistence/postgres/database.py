@@ -8,8 +8,16 @@ from typing import AsyncGenerator
 # Try to detect if running inside Docker or locally
 def get_database_url():
     """Get database URL, detecting environment"""
-    if os.getenv("DATABASE_URL"):
-        return os.getenv("DATABASE_URL")
+    db_url = os.getenv("DATABASE_URL")
+    
+    if db_url:
+        # Ensure the URL uses asyncpg driver
+        # Convert postgres:// or postgresql:// to postgresql+asyncpg://
+        if db_url.startswith("postgres://"):
+            db_url = db_url.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif db_url.startswith("postgresql://") and "+asyncpg" not in db_url:
+            db_url = db_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return db_url
     
     # Check if running inside Docker (check if 'postgres' hostname resolves)
     # If not, use localhost
